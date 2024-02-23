@@ -1,9 +1,10 @@
-CREATE VIEW V_CustomerOrderSummary as
+ALTER VIEW V_CustomerOrderSummary as
 SELECT State,
-  AVG(TotalDue) as Avg_Due,
-  MIN(TotalDue) as Min_Due,
-  MAX(TotalDue) as Max_Due,
-  SUM(TotalDue) as Total_Sales
+  ROUND(AVG(TotalDue), 2) as Avg_Due,
+  ROUND(MIN(TotalDue), 2) as Min_Due,
+  ROUND(MAX(TotalDue), 2) as Max_Due,
+  ROUND(SUM(TotalDue), 2) as Total_Sales
 FROM Customer C
   JOIN Orders O ON O.CustomerID = C.CustomerID
 GROUP BY State
+ORDER BY Total_Sales DESC
